@@ -1,0 +1,44 @@
+{% extends 'admin_base.html' %}
+{% load bootstrap4 %}
+{% block body_block %}
+
+<div class="container">
+    
+    <div class="row" style="background-color: #212429;">
+        <div class="col-md-6">
+          <h1 class="text-light text-center py-3" >List of trainers</h1>
+        </div>
+        <div class="col-md-6 m-auto ">
+      
+          <form class="form-inline my-2 my-lg-0 pl-3" method="POST" action="{% url 'manager:trainerSearch' %}">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="searh" placeholder="Search only by username" aria-label="Search" name='data' >
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+
+<table class="table table-secondary">
+    <thead class="thead-dark">
+          <tr>
+            <th scope="col">username</th>
+            <th scope="col">name</th>
+            <th scope="col">email</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for i in trainer_info %}
+            <tr>
+                <td><a href="{% url 'manager:trainerDetail' pk=i.pk %}"> {{i.username}} </a></td>
+                <td> {{i.name}} </td>
+                <td> {{i.email}} </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+
+
+</div>
+
+{% endblock %}

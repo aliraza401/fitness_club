@@ -1,0 +1,45 @@
+{% extends 'admin_base.html' %}
+{% load bootstrap4 %}
+{% block body_block %}
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-mmd-6">
+      <h1>Detail of  trainer : <strong>{{trainer_info_detail.username}}</strong></h1>
+      <h3><strong>username:</strong> {{trainer_info_detail.username}}</h3>
+      <h3><strong>name:</strong> {{trainer_info_detail.name}}</h3>
+      <h3><strong>email:</strong> {{trainer_info_detail.email}}</h3>
+    </div>
+    <div class="col-md-6 text-center">
+      <div class="mt-5">
+        <a class="btn btn-primary btn-lg rounded" href="{% url 'manager:trainerUpdate' pk=trainer_info_detail.pk %}"> Update Details </a>
+        <a class="btn btn-danger btn-lg rounded" href="{% url 'manager:trainerDelete' pk=trainer_info_detail.pk %}"> Delete Trainer </a>
+      </div>
+    </div>
+  </div>
+
+    <table class="table table-secondary">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">amount</th>
+            <th scope="col">month</th>
+            <th scope="col">date_paid</th>
+          </tr>
+        </thead>
+        <tbody>
+            <!-- {% for i in member_info_detail.fee.all %}
+                <tr>
+                    <td> {{i.amount}} </td>
+                    <td> {{i.month}} </td>
+                    <td> {{i.date_paid}} </td>
+                </tr>
+            {% endfor %} -->
+        </tbody>
+      </table>
+    
+
+
+</div>
+
+{% endblock %}

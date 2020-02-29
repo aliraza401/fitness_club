@@ -1,0 +1,19 @@
+{% extends 'admin_base.html' %}
+{% load bootstrap4 %}
+{% block body_block %}
+
+<div class="p-5">
+    {% if form.instance.pk %}
+        <h1>Update Trainer</h1>
+    {% else %}
+        <h1>New Trainer</h1>
+    {% endif %}
+
+    <form method="POST p-5">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-success" value="Proceed">
+    </form>
+</div>
+
+{% endblock %}

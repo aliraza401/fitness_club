@@ -1,0 +1,48 @@
+{% extends 'admin_base.html' %}
+{% load bootstrap4 %}
+{% block body_block %}
+
+<div class="container">
+    
+    <div class="row">
+      <div class="col-md-6">
+          <h3 class=""><strong>username:</strong><span style="font-size: 24px;">{{member_info_detail.username}}</span></h3>
+          <h3><strong>name:</strong> {{member_info_detail.name}}</h3>
+          <h3><strong>email:</strong> {{member_info_detail.email}}</h3>
+          <h3><strong>age:</strong> {{member_info_detail.age}}</h3>
+          <h3><strong>height:</strong> {{member_info_detail.height}}</h3>
+          <h3><strong>weight:</strong> {{member_info_detail.weight}}</h3>
+      </div>
+      <div class="col-md-6">
+          <div class="mt-5">
+            <a class="btn btn-primary btn-lg rounded" href="{% url 'manager:memberFeeById'  pk=member_info_detail.pk %}"> Add Fee </a>
+            <a class="btn btn-primary btn-lg rounded" href="{% url 'manager:memberUpdate' pk=member_info_detail.pk %}"> Update Details </a>
+            <a class="btn btn-danger btn-lg rounded" href="{% url 'manager:memberDelete' pk=member_info_detail.pk %}"> Delete Member </a>
+          </div>
+      </div>
+
+    </div>
+
+
+    <table class="table table-secondary">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">amount</th>
+            <th scope="col">month</th>
+            <th scope="col">date_paid</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for i in member_info_detail.fee.all %}
+                <tr>
+                    <td> {{i.amount}} </td>
+                    <td> {{i.month}} </td>
+                    <td> {{i.date_paid}} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+ 
+</div>
+
+{% endblock %}

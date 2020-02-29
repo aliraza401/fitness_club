@@ -1,0 +1,15 @@
+{% extends 'admin_base.html' %}
+{% load bootstrap4 %}
+{% block body_block %}
+
+<div  class="p-5">
+    <h1>Add member fee</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-success" value="Proceed">
+    </form>
+</div>
+
+{% endblock %}

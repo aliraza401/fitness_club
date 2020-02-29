@@ -1,0 +1,260 @@
+
+{% extends 'admin_base.html' %}
+{% load staticfiles %}
+
+    
+{% block body_block %}
+    
+    <!-- Counts Section -->
+      <section class="dashboard-counts section-padding">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Count item widget-->
+            <div class="col-md-4">
+              <div class="wrapper count-title d-flex">
+                <div class="icon"><i class="icon-user"></i></div>
+                <div class="name"><strong class="text-uppercase">Total Members</strong>
+                  <div class="count-number"> {{ member_count }} </div>
+                </div>
+              </div>
+            </div>
+            <!-- Count item widget-->
+            <div class="col-md-4">
+              <div class="wrapper count-title d-flex">
+                <div class="icon"><i class="icon-padnote"></i></div>
+                <div class="name"><strong class="text-uppercase">Total Trainers</strong>
+                  <div class="count-number"> {{ trainer_count }}</div>
+                </div>
+              </div>
+            </div>
+            <!-- Count item widget-->
+            <div class="col-md-4">
+              <div class="wrapper count-title d-flex">
+                <div class="icon"><i class="icon-check"></i></div>
+                <div class="name"><strong class="text-uppercase"> members subscribed This month </strong>
+                  <div class="count-number">{{daily_member_count}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Header Section-->
+      <section class="dashboard-header section-padding">
+        <div class="container-fluid">
+          <div class="row d-flex align-items-md-stretch">
+
+            <!-- To Do List-->
+            <div class="col-lg-3 col-md-6 ">
+              <div class="card to-do">
+                <h2 class="display h4">Aim</h2>
+                <p>A gym, short for gymnasium, is an open air or covered location for gymnastics and athletics and gymnastic services such as in schools and colleges, from the ancient Greek gymnasium.</p>
+                
+                <ul class="check-lists list-unstyled">
+                  <li class="d-flex align-items-center"> 
+                    <input type="checkbox" id="list-1" name="list-1" class="form-control-custom">
+                    <label for="list-1">A admin can only add other admins.</label>
+                  </li>
+                  <li class="d-flex align-items-center"> 
+                    <input type="checkbox" id="list-2" name="list-2" class="form-control-custom">
+                    <label for="list-2">To delete, remove, update goto django admin panel</label>
+                  </li>
+                  <li class="d-flex align-items-center"> 
+                    <input type="checkbox" id="list-3" name="list-3" class="form-control-custom">
+                    <label for="list-3">admin can add,remove,update, view details of any member </label>
+                  </li>
+                  <li class="d-flex align-items-center"> 
+                    <input type="checkbox" id="list-4" name="list-4" class="form-control-custom">
+                    <label for="list-4">admin can add,remove,update, view details of any trainer</label>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <!-- Pie Chart-->
+            <div class="col-lg-3 col-md-6">
+              <div class="card project-progress">
+                <h2 class="display h4">About us</h2>
+                <p> Gymnasia apparatus such as bar-bells, parallel bars, jumping board, running path, tennis-balls, cricket field, fencing area, and so forth are used as exercises.</p>
+                <div class="pie-chart">
+                  <canvas id="pieChart" width="300" height="300"> </canvas>
+                </div>
+              </div>
+            </div>
+            <!-- Line Chart -->
+            <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+              <div class="card sales-report">
+                <h2 class="display h4">Members report</h2>
+                <p>we done have policy of sharing members details with anyone.</p>
+                <div class="line-chart">
+                  <canvas id="lineCahrt"></canvas>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- Statistics Section-->
+      <section class="statistics ">
+        <div class="container-fluid">
+          <div class="row d-flex">
+            <div class="col-lg-4">
+              <!-- Income-->
+              <a href="{% url 'manager:memberC' %}" class="">
+                <div class="card income text-center bg-success text-dark">
+                  <div class="number">Add New Member</div>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-4">
+              <!-- Monthly Usage-->
+              <a href="{% url 'manager:trainerC' %}" class="">
+                <div class="card income text-center bg-success text-dark">
+                  <div class="number">Add New Trainer</div>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-lg-4">
+              <!-- User Actibity-->
+                <a href="{% url 'manager:adminC' %}" class="">
+                  <div class="card income text-center bg-success text-dark">
+                    <div class="number">Add New Admin</div>
+                  </div>
+                </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Updates Section -->
+      <section class="mt-30px mb-30px">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-4 ">
+              <!-- Recent members          -->
+              <div id="new-updates" class="card updates recent-updated">
+                <div id="updates-header" class="card-header d-flex justify-content-between align-items-center">
+                  <h2 class="h5 display"><a data-toggle="collapse" data-parent="#new-updates" href="#updates-box" aria-expanded="true" aria-controls="updates-box">Recent Members</a></h2><a data-toggle="collapse" data-parent="#new-updates" href="#updates-box" aria-expanded="true" aria-controls="updates-box"><i class="fa fa-angle-down"></i></a>
+                </div>
+                <div id="updates-box" role="tabpanel" class="collapse show">
+                  <ul class="news list-unstyled">
+                    <!-- Item-->
+                    <li class="d-flex justify-content-between"> 
+                      <div class="left-col d-flex">
+                        <div class="icon"><i class="icon-rss-feed"></i></div>
+                        <div class="title"><strong>{{m1_username  }}</strong>
+                          <p>{{m1_email}}</p>
+                        </div>
+                      </div>
+                      <div class="right-col text-right">
+                        <div class="update-date">{{m1_date}}</div>
+                      </div>
+                    </li>
+                    <!-- Item-->
+                    <li class="d-flex justify-content-between"> 
+                      <div class="left-col d-flex">
+                        <div class="icon"><i class="icon-rss-feed"></i></div>
+                        <div class="title"><strong>{{m0_username  }}</strong>
+                          <p>{{m0_email}}</p>
+                        </div>
+                      </div>
+                      <div class="right-col text-right">
+                        <div class="update-date">{{m0_date}}</div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- Recent members End-->
+            </div>
+
+            <div class="col-lg-4 ">
+              <!-- Recent treainer          -->
+              <div id="new-updates" class="card updates recent-updated">
+                <div id="updates-header" class="card-header d-flex justify-content-between align-items-center">
+                  <h2 class="h5 display"><a data-toggle="collapse" data-parent="#new-updates" href="#updates-box" aria-expanded="true" aria-controls="updates-box">Recent Trainers</a></h2><a data-toggle="collapse" data-parent="#new-updates" href="#updates-box" aria-expanded="true" aria-controls="updates-box"><i class="fa fa-angle-down"></i></a>
+                </div>
+                <div id="updates-box" role="tabpanel" class="collapse show">
+                  <ul class="news list-unstyled">
+                    <!-- Item-->
+                    <li class="d-flex justify-content-between"> 
+                      <div class="left-col d-flex">
+                        <div class="icon"><i class="icon-rss-feed"></i></div>
+                        <div class="title"><strong>{{t0_username  }}</strong>
+                          <p>{{t0_email}}</p>
+                        </div>
+                      </div>
+                      <div class="right-col text-right">
+                        <div class="update-date">{{t0_date}}</div>
+                      </div>
+                    </li>
+                    <!-- Item-->
+                    <li class="d-flex justify-content-between"> 
+                      <div class="left-col d-flex">
+                        <div class="icon"><i class="icon-rss-feed"></i></div>
+                        <div class="title"><strong>{{t1_username  }}</strong>
+                          <p>{{t1_email}}</p>
+                        </div>
+                      </div>
+                      <div class="right-col text-right">
+                        <div class="update-date">{{t1_date}}</div>
+                      </div>
+                    </li>        
+                  </ul>
+                </div>
+              </div>
+              <!-- Recent trainer End-->
+            </div>
+
+            <div class="col-lg-4 ">
+              <!-- Recent members          -->
+              <div id="new-updates" class="card updates recent-updated">
+                <div id="updates-header" class="card-header d-flex justify-content-between align-items-center">
+                  <h2 class="h5 display"><a data-toggle="collapse" data-parent="#new-updates" href="#updates-box" aria-expanded="true" aria-controls="updates-box">Recent Members</a></h2><a data-toggle="collapse" data-parent="#new-updates" href="#updates-box" aria-expanded="true" aria-controls="updates-box"><i class="fa fa-angle-down"></i></a>
+                </div>
+                <div id="updates-box" role="tabpanel" class="collapse show">
+                  <ul class="news list-unstyled">
+                    <!-- Item-->
+                    <li class="d-flex justify-content-between"> 
+                      <div class="left-col d-flex">
+                        <div class="icon"><i class="icon-rss-feed"></i></div>
+                        <div class="title"><strong>{{m1_username  }}</strong>
+                          <p>{{m1_email}}</p>
+                        </div>
+                      </div>
+                      <div class="right-col text-right">
+                        <div class="update-date">{{m1_date}}</div>
+                      </div>
+                    </li>
+                    <!-- Item-->
+                    <li class="d-flex justify-content-between"> 
+                      <div class="left-col d-flex">
+                        <div class="icon"><i class="icon-rss-feed"></i></div>
+                        <div class="title"><strong>{{m0_username  }}</strong>
+                          <p>{{m0_email}}</p>
+                        </div>
+                      </div>
+                      <div class="right-col text-right">
+                        <div class="update-date">{{m0_date}}</div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- Recent members End-->
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+
+{% endblock %}

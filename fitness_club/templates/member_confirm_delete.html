@@ -1,0 +1,14 @@
+{% extends 'admin_base.html' %}
+{% load bootstrap4 %}
+{% block body_block %}
+
+<div class="container py-5">
+    <form method="POST">
+        {% csrf_token %}
+        <h4>You sure you want to delete :  <strong>{{member.username }}</strong> ? </h4>
+        <a href="{% url 'manager:memberlist' %}" class="btn btn-success" > CANCEL </a>
+        <input type="submit" class="btn btn-danger" value="CONFIRM DELETE">
+    </form>
+</div>
+
+{% endblock %} 
